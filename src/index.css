@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    color: #363e52;
+}
+
+.container {
+    width: 630px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+.main {
+    margin-top: 30px;
+}
+
+.main__inp,
+.main__keyboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
+.keyboard__row {
+    display: flex;
+}
+
+.word,
+.word__squares,
+.keyboard__btns {
+    display: flex;
+}
+
+.word__square {
+    width: 56px;
+    height: 56px;
+    border-radius: 5px;
+    border: 2px solid #dee1e9;
+    margin: 3px;
+    font-size: 30px;
+    font-weight: 600;
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
+.keyboard {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+}
+
+.keyboard__key {
+    display: grid;
+    grid-template-columns: minmax(51px, 61px);
+    place-items: center;
+    height: 46px;
+    background-color: #dce1ed;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+.keyboard__btn {
+    width: 93px;
+    height: 46px;
+    background-color: #dce1ed;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    margin: 3px;
+}
