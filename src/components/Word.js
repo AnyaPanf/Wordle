@@ -2,6 +2,7 @@ import { colorWord } from "../colorWord";
 
 export const Word = ({ word, secretWord }) => {
   const colorsOfLetters = colorWord(word, secretWord)
+  console.log(colorsOfLetters);
 
   return (
     <div className='word'>

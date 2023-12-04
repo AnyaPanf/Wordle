@@ -1,24 +1,33 @@
 import { Word } from "./components/Word";
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { colorAlphabet } from "./colorAlphabet";
 import Keyboard from "./components/Keyboard";
 import { CurrentWord } from "./components/CurrentWord";
 import { EmptyLine } from "./components/EmptyLine";
+import { dictionary } from "./dictionary";
 
 const MAX_ATTEMTS_NUMBER = 6;
 // https://javascript.info/task/uppercast-constant
 
 function App() {
   const [words, setWords] = useState([]);
-  const [secretWord, setSecretWord] = useState('PIQUE')
+  const [secretWord, setSecretWord] = useState(dictionary[Math.floor(Math.random() * dictionary.length)].toUpperCase())
   const [letter, setLetter] = useState("")
-  console.log(letter);
+  const [text, setText] = useState("")
+  console.log(secretWord);
 
   const colors = colorAlphabet(words, secretWord)
 
+  useEffect(() => {
+    if (words[words.length - 1] === secretWord) {
+      setText("You win!")
+    } else if (words.length === 6 && words[words.length - 1] !== secretWord) {
+      setText("You lost!")
+    }
+  }, [words])
 
   const handleEnter = () => {
-    if (letter.length === 5) {
+    if (letter.length === 5 ) {
       setWords(prev => [...prev, letter])
       setLetter("")
     } else {
@@ -31,6 +40,7 @@ function App() {
   }
 
   const handleLetterPress = (letter) => {
+
     setLetter(prev => prev.length < 5 ? prev + letter : prev)
   }
 
@@ -52,10 +62,11 @@ function App() {
             <EmptyLine />
           ))}
         </div>
+        <p className="result">{text}</p>
         <div className="main__keyboard">
           <Keyboard
             colors={colors}
-            onLetterPress={handleLetterPress }
+            onLetterPress={handleLetterPress}
             handleEnter={handleEnter}
             handleDelete={handleDelete} />
         </div>
