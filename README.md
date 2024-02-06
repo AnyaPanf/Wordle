@@ -2,6 +2,13 @@
 
 Wordle is a simple browser game based on word search. It is a word search game in which the player has to find the correct word to fill in the grid.
 
+**Game rules:**
+- Each guess must be a valid five-letter word.
+- The color of a tile will change to show you how close your guess was.
+- If the tile turns green, the letter is in the word, and it is in the correct spot.
+- If the tile turns yellow, the letter is in the word, but it is not in the correct spot.
+- If the tile turns gray, the letter is not in the word.
+
 ## Technologies
 - HTML
 - CSS
