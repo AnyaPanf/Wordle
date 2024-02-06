@@ -6,6 +6,7 @@ Wordle is a simple browser game based on word search. It is a word search game i
 - HTML
 - CSS
 - JavaScript
+- React hooks
 - Jest
 
 ## Available Scripts
