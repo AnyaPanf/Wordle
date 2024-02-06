@@ -3,7 +3,7 @@ import { colorWord } from "./colorWord";
 describe("colorWord", () => {
   describe("SWEET & PIQUE", () => {
     const actualColors = colorWord("SWEET", "PLACE").map(obj => obj.color);
-    expect(actualColors).toEqual(["grey","grey","yellow","grey","grey"]);
+    expect(actualColors).toEqual(["grey", "grey", "yellow", "grey", "grey"]);
   })
 
   describe("secret === PLACE", () => {

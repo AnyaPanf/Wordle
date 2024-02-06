@@ -24,51 +24,19 @@ jest.mock("./colorWord", () => ({
   },
 }));
 
-// https://jestjs.io/docs/mock-functions
 describe("colorAlphabet", () => {
   test("word === PLACE", () => {
     const expectedResult = {
-        "S": "grey",
-        "W": "grey",
-        "E": "yellow",
-        "T": "grey",
-        "P": "green",
-        "O": "grey",
-        "I": "yellow",
-        "N": "grey",
-      
-
+      "S": "grey",
+      "W": "grey",
+      "E": "yellow",
+      "T": "grey",
+      "P": "green",
+      "O": "grey",
+      "I": "yellow",
+      "N": "grey",
     };
     const actualResult = colorAlphabet(["SWEET", "POINT"], "PIQUE")
     expect(actualResult).toEqual(expectedResult);
   });
-
-//   test("word === SPLIT", () => {
-//     const expectedResult = [{
-//       letter: "S",
-//       color: "green"
-//     },
-//     {
-//       letter: "P",
-//       color: "green"
-
-//     },
-//     {
-//       letter: "L",
-//       color: "green"
-
-//     },
-//     {
-//       letter: "I",
-//       color: "grey"
-
-//     },
-//     {
-//       letter: "T",
-//       color: "green"
-
-//     }];
-
-//     expect(colorWord("SPLIT", "SPLAT")).toEqual(expectedResult);
-//   });
 })

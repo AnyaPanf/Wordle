@@ -1,7 +1,7 @@
 
 export const colorWord = (word, secretWord) => {
 
-    let colorsOfLetters = []   //красит все буквы в инпутах
+    let colorsOfLetters = []
     let checkLetters = []
     word.split('').forEach((letter, idx) => {
         if (secretWord.indexOf(letter) === -1) {

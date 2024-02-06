@@ -1,47 +1,59 @@
 import { Word } from "./components/Word";
-import { useState, useEffect } from "react"
+import { useState, useMemo } from "react"
 import { colorAlphabet } from "./colorAlphabet";
 import Keyboard from "./components/Keyboard";
 import { CurrentWord } from "./components/CurrentWord";
 import { EmptyLine } from "./components/EmptyLine";
 import { dictionary } from "./dictionary";
+import { GameStatus } from "./components/GameStatus";
+import { getResult } from "./getResult";
 
 const MAX_ATTEMTS_NUMBER = 6;
-// https://javascript.info/task/uppercast-constant
+
+const generateInitialState = () => ({
+  currentWord: '',
+  secretWord: dictionary[Math.floor(Math.random() * dictionary.length)].toUpperCase(),
+  words: []
+})
 
 function App() {
-  const [words, setWords] = useState([]);
-  const [secretWord, setSecretWord] = useState(dictionary[Math.floor(Math.random() * dictionary.length)].toUpperCase())
-  const [letter, setLetter] = useState("")
-  const [text, setText] = useState("")
-  console.log(secretWord);
+  const [state, setState] = useState(generateInitialState)
+  const { words, currentWord, secretWord } = state
+  const [mistake, setMistake] = useState("")
 
-  const colors = colorAlphabet(words, secretWord)
-
-  useEffect(() => {
-    if (words[words.length - 1] === secretWord) {
-      setText("You win!")
-    } else if (words.length === 6 && words[words.length - 1] !== secretWord) {
-      setText("You lost!")
-    }
-  }, [words])
+  const colors = useMemo(() => colorAlphabet(words, secretWord), [words, secretWord]);
+  const result = useMemo(() => getResult(words, secretWord), [words, secretWord])
 
   const handleEnter = () => {
-    if (letter.length === 5 ) {
-      setWords(prev => [...prev, letter])
-      setLetter("")
-    } else {
-      return console.log("Unfinished word");
-    }
+
+    setState((prev) => {
+      if (prev.currentWord.length === 5 && dictionary.includes(currentWord.toLowerCase())) {
+        return {
+          ...prev,
+          words: [...prev.words, prev.currentWord],
+          currentWord: ""
+        }
+      } else if (prev.currentWord.length !== 5) {
+        setMistake("Unfinished word")
+        setTimeout(() => setMistake(""), 2000)
+      } else {
+        setMistake("The word does not exist")
+        setTimeout(() => setMistake(""), 2000)
+      }
+      return prev
+    })
   }
 
   const handleDelete = () => {
-    return setLetter(prev => prev.slice(0, -1))
+    setState((prev) => ({ ...prev, currentWord: prev.currentWord.slice(0, -1) }))
   }
 
-  const handleLetterPress = (letter) => {
+  const handleLetterPress = (currentWord) => {
+    setState((prev) => prev.currentWord.length < 5 ? { ...prev, currentWord: prev.currentWord + currentWord } : prev)
+  }
 
-    setLetter(prev => prev.length < 5 ? prev + letter : prev)
+  const handleNewGame = () => {
+    setState(generateInitialState());
   }
 
   const emptyLinesNumber = words.length === MAX_ATTEMTS_NUMBER
@@ -51,18 +63,20 @@ function App() {
   return (
     <div className="main">
       <div className="container">
+        <div type="button" className="main__btn" onClick={handleNewGame}><p>New game</p></div>
         <div className="main__inp">
           {words.map((word) => (
             <Word word={word} secretWord={secretWord} />
           ))}
           {words.length < MAX_ATTEMTS_NUMBER && (
-            <CurrentWord letters={letter} />
+            <CurrentWord currentWord={currentWord} />
           )}
           {Array(emptyLinesNumber).fill().map(() => (
             <EmptyLine />
           ))}
+          <div className="mistake" style={{ display: mistake ? 'block' : 'none' }}><p>{mistake}</p></div>
+          <GameStatus status={result} secretWord={secretWord} />
         </div>
-        <p className="result">{text}</p>
         <div className="main__keyboard">
           <Keyboard
             colors={colors}
@@ -76,5 +90,3 @@ function App() {
 }
 
 export default App;
-
-// https://magma.com/d/J59Xwc0QPl
