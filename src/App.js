@@ -7,6 +7,7 @@ import { EmptyLine } from "./components/EmptyLine";
 import { dictionary } from "./dictionary";
 import { GameStatus } from "./components/GameStatus";
 import { getResult } from "./getResult";
+import { Rules } from "./components/Rules";
 
 const MAX_ATTEMTS_NUMBER = 6;
 
@@ -20,6 +21,7 @@ function App() {
   const [state, setState] = useState(generateInitialState)
   const { words, currentWord, secretWord } = state
   const [mistake, setMistake] = useState("")
+  const [rules, setRules] = useState(false)
 
   const colors = useMemo(() => colorAlphabet(words, secretWord), [words, secretWord]);
   const result = useMemo(() => getResult(words, secretWord), [words, secretWord])
@@ -56,6 +58,10 @@ function App() {
     setState(generateInitialState());
   }
 
+  const handleRules = () => {
+    setRules(!rules)
+  }
+
   const emptyLinesNumber = words.length === MAX_ATTEMTS_NUMBER
     ? 0
     : MAX_ATTEMTS_NUMBER - words.length - 1;
@@ -63,7 +69,16 @@ function App() {
   return (
     <div className="main">
       <div className="container">
-        <div type="button" className="main__btn" onClick={handleNewGame}><p>New game</p></div>
+        <div className="main__btns">
+          <div type="button" className="main__btn" onClick={handleRules}><p>How to play</p></div>
+          <div className="main__languages">
+            <div type="button" className="language__btn">RU</div>
+            <p>/</p>
+            <div type="button" className="language__btn">EN</div>
+          </div>
+          <div type="button" className="main__btn" onClick={handleNewGame}><p>New game</p></div>
+        </div>
+
         <div className="main__inp">
           {words.map((word) => (
             <Word word={word} secretWord={secretWord} />
@@ -76,6 +91,7 @@ function App() {
           ))}
           <div className="mistake" style={{ display: mistake ? 'block' : 'none' }}><p>{mistake}</p></div>
           <GameStatus status={result} secretWord={secretWord} />
+          <Rules handleRules={handleRules} rules={rules} />
         </div>
         <div className="main__keyboard">
           <Keyboard
