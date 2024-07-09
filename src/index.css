@@ -136,13 +136,12 @@ button {
 
 .rules {
     width: 400px;
-    height: 350px;
     position: absolute;
     border-radius: 15px;
     background-color: #ffffff;
     filter: drop-shadow(0 0 30px #363e52cc);
     text-align: center;
-    padding: 10px;
+    padding: 15px;
 }
 
 .close {
@@ -159,5 +158,26 @@ button {
 }
 
 .main__languages {
-display: flex;
+    display: flex;
+}
+
+.rules__list {
+    padding: 15px;
+}
+
+.rules__item {
+    text-align: left;
+    margin-top: 10px;
+}
+
+.language__btn {
+    margin-right: 5px;
+    background-color: #ffffff;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.language__btn-checked {
+    background-color: #dce1ed; 
 }

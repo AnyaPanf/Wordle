@@ -1,17 +1,11 @@
-import Keys from "./Keys"
-import { useEffect } from "react"
-import enterImg from '../assets/enter.png'
-import deleteImg from '../assets/delete.png'
-
-// const firstRowKeys = "ЙЦУКЕНГШЩЗХЪ".split("")
-// const secondRowKeys = "ФЫВАПРОЛДЖЭ".split("")
-// const thirdRowKeys = "ЯЧСМИТЬБЮ".split("")
-
-const firstRowKeys = "QWERTYUIOP".split("")
-const secondRowKeys = "ASDFGHJKL".split("")
-const thirdRowKeys = "ZXCVBNM".split("")
+import Keys from "./Keys";
+import { useEffect } from "react";
+import enterImg from '../assets/enter.png';
+import deleteImg from '../assets/delete.png';
+import { useTranslation } from "react-i18next";
 
 const Keyboard = ({ colors, onLetterPress, handleEnter, handleDelete }) => {
+    const { t } = useTranslation();
     useEffect(() => {
         const listener = (event) => {
             let key = event.key.toUpperCase()
@@ -22,28 +16,28 @@ const Keyboard = ({ colors, onLetterPress, handleEnter, handleDelete }) => {
             } else if (event.code === "Enter" || "NumpadEnter") {
                 handleEnter()
             }
-        }
+        };
 
         window.addEventListener("keydown", listener);
         return () => {
             window.removeEventListener("keydown", listener)
         };
-    }, [handleEnter])
+    }, [handleEnter]);
 
     return (
         <div className="keyboard">
             <Keys colors={colors}
-                keys={firstRowKeys}
+                keys={t("firstRowKeys").split("")}
                 onLetterPress={onLetterPress} />
             <Keys colors={colors}
-                keys={secondRowKeys}
+                keys={t("secondRowKeys").split("")}
                 onLetterPress={onLetterPress} />
             <div className="keyboard__btns">
-                <button className="keyboard__btn" type="submit" onClick={handleDelete}><img src={deleteImg}/></button>
+                <button className="keyboard__btn" type="submit" onClick={handleDelete}><img src={deleteImg} /></button>
                 <Keys colors={colors}
-                    keys={thirdRowKeys}
+                    keys={t("thirdRowKeys").split("")}
                     onLetterPress={onLetterPress} />
-                <button className="keyboard__btn" type="submit" onClick={handleEnter}><img src={enterImg}/></button>
+                <button className="keyboard__btn" type="submit" onClick={handleEnter}><img src={enterImg} /></button>
             </div>
         </div>
     )

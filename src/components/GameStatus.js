@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 export const GameStatus = ({ status, secretWord }) => {
+  const { t } = useTranslation();
+
   if (status === "GAME") {
     return null
   }
@@ -6,7 +10,7 @@ export const GameStatus = ({ status, secretWord }) => {
   if (status === "WIN") {
     return (
       <div className="result">
-        <p>You win!</p>
+        <p>{t("win")}</p>
         <p>{secretWord}</p>
       </div>
     )
@@ -14,7 +18,7 @@ export const GameStatus = ({ status, secretWord }) => {
 
   return (
     <div className="result">
-      <p>You lost</p>
+      <p>{t("lost")}</p>
       <p>{secretWord}</p>
     </div>
   )
