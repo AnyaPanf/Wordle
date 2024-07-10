@@ -7,10 +7,11 @@
 }
 
 .container {
-    width: 715px;
+    max-width: 715px;
     margin: 0 auto;
     padding: 0 15px;
-    /* display: grid; */
+    display: grid;
+    place-items: center;
 }
 
 button {
@@ -22,6 +23,7 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .main__btn {
@@ -153,7 +155,7 @@ button {
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    margin-left: 355px;
+    margin-left: 345px;
     cursor: pointer;
 }
 
@@ -163,6 +165,10 @@ button {
 
 .rules__list {
     padding: 15px;
+}
+
+ol li::marker {
+    font-weight: 600;
 }
 
 .rules__item {
@@ -179,5 +185,5 @@ button {
 }
 
 .language__btn-checked {
-    background-color: #dce1ed; 
+    background-color: #dce1ed;
 }

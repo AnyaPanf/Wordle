@@ -16,6 +16,8 @@ const MAX_ATTEMTS_NUMBER = 6;
 function App() {
   const { t, i18n } = useTranslation();
   const dictionary = (i18n.language === 'en' ? dictionaryEn : dictionaryRu);
+  console.log(dictionary);
+
   const generateInitialState = () => ({
     currentWord: '',
     secretWord: dictionary[Math.floor(Math.random() * dictionary.length)].toUpperCase(),
@@ -28,10 +30,11 @@ function App() {
   const [rules, setRules] = useState(false);
   const colors = useMemo(() => colorAlphabet(words, secretWord), [words, secretWord]);
   const result = useMemo(() => getResult(words, secretWord), [words, secretWord]);
+  console.log(secretWord);
 
   const handleEnter = () => {
     setState((prev) => {
-      if (prev.currentWord.length === 5 && dictionary.includes(currentWord.toLowerCase())) {
+      if (prev.currentWord.length === 5 && `dictionary${i18n.language}`.includes(currentWord.toLowerCase())) {
         return {
           ...prev,
           words: [...prev.words, prev.currentWord],

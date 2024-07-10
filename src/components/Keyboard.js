@@ -8,9 +8,15 @@ const Keyboard = ({ colors, onLetterPress, handleEnter, handleDelete }) => {
     const { t } = useTranslation();
     useEffect(() => {
         const listener = (event) => {
-            let key = event.key.toUpperCase()
-            if (event.code === `Key${key}`) {
-                onLetterPress(key)
+            console.log(event);
+            let key = {
+                symbol: event.key.toUpperCase(),
+                code: event.which,
+            };
+            console.log(key);
+
+            if (event.keyCode === key.code) {
+                onLetterPress(key.symbol)
             } else if (event.code === "Backspace") {
                 handleDelete()
             } else if (event.code === "Enter" || "NumpadEnter") {
