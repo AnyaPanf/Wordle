@@ -15,16 +15,18 @@ const MAX_ATTEMTS_NUMBER = 6;
 
 function App() {
   const { t, i18n } = useTranslation();
-  const dictionary = (i18n.language === 'en' ? dictionaryEn : dictionaryRu);
+  // const [dictionary, setDictionary] = useState(dictionaryEn);
+  const dictionary = i18n.language === 'en' ? dictionaryEn : dictionaryRu;
   console.log(dictionary);
 
-  const generateInitialState = () => ({
-    currentWord: '',
-    secretWord: dictionary[Math.floor(Math.random() * dictionary.length)].toUpperCase(),
-    words: []
-  })
+  const generateInitialState = () => (
+    {
+      currentWord: '',
+      secretWord: dictionary[Math.floor(Math.random() * dictionary.length)].toUpperCase(),
+      words: [],
+    });
 
-  const [state, setState] = useState(generateInitialState);
+  const [state, setState] = useState(generateInitialState());
   const { words, currentWord, secretWord } = state;
   const [mistake, setMistake] = useState("");
   const [rules, setRules] = useState(false);
@@ -34,11 +36,11 @@ function App() {
 
   const handleEnter = () => {
     setState((prev) => {
-      if (prev.currentWord.length === 5 && `dictionary${i18n.language}`.includes(currentWord.toLowerCase())) {
+      if (prev.currentWord.length === 5 && dictionary.includes(currentWord.toLowerCase())) {
         return {
           ...prev,
           words: [...prev.words, prev.currentWord],
-          currentWord: ""
+          currentWord: "",
         }
       } else if (prev.currentWord.length !== 5) {
         setMistake(t("unfinishedMistake"))
@@ -70,7 +72,7 @@ function App() {
   const handleLangChange = (code) => {
     i18n.changeLanguage(code)
     setState(generateInitialState())
-  }
+  };
 
   const languages = [
     { code: 'en', name: 'En' },
@@ -120,6 +122,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

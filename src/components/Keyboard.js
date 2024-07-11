@@ -8,14 +8,12 @@ const Keyboard = ({ colors, onLetterPress, handleEnter, handleDelete }) => {
     const { t } = useTranslation();
     useEffect(() => {
         const listener = (event) => {
-            console.log(event);
             let key = {
                 symbol: event.key.toUpperCase(),
                 code: event.which,
             };
-            console.log(key);
 
-            if (event.keyCode === key.code) {
+            if (event.keyCode === key.code && event.keyCode > 64 && event.keyCode < 1103) {
                 onLetterPress(key.symbol)
             } else if (event.code === "Backspace") {
                 handleDelete()
@@ -47,6 +45,6 @@ const Keyboard = ({ colors, onLetterPress, handleEnter, handleDelete }) => {
             </div>
         </div>
     )
-}
+};
 
 export default Keyboard
