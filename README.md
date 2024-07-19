@@ -1,6 +1,7 @@
 # Wordle
 
 Wordle is a simple browser game based on word search. It is a word search game in which the player has to find the correct word to fill in the grid.
+Available in English and Russian!
 
 **Game rules:**
 - Each guess must be a valid five-letter word.
