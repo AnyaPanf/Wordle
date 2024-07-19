@@ -18,7 +18,6 @@ const App = () => {
   const initialLanguage = dictionaryEn;
   let dictionary = i18n.language === 'en' ? dictionaryEn : dictionaryRu;
   const languageRef = useRef(initialLanguage);
-
   languageRef.current = dictionary;
 
   const generateInitialState = () => (
@@ -34,7 +33,6 @@ const App = () => {
   const [rules, setRules] = useState(false);
   const colors = useMemo(() => colorAlphabet(words, secretWord), [words, secretWord]);
   const result = useMemo(() => getResult(words, secretWord), [words, secretWord]);
-  console.log(secretWord);
 
   const handleEnter = () => {
     setState((prev) => {
