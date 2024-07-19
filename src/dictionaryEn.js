@@ -2308,4 +2308,4 @@ export const dictionaryEn = [
     "zebra",
     "zesty",
     "zonal",
-  ]
+  ];

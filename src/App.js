@@ -1,32 +1,34 @@
+import { dictionaryEn } from './dictionaryEn';
+import { dictionaryRu } from './dictionaryRu';
+import { useTranslation } from "react-i18next";
 import { Word } from "./components/Word";
-import { useState, useMemo } from "react"
+import { useState, useMemo, useRef } from "react"
 import { colorAlphabet } from "./colorAlphabet";
 import Keyboard from "./components/Keyboard";
 import { CurrentWord } from "./components/CurrentWord";
 import { EmptyLine } from "./components/EmptyLine";
-import { dictionaryEn } from "./dictionaryEn";
-import { dictionaryRu } from "./dictionaryRu";
 import { GameStatus } from "./components/GameStatus";
 import { getResult } from "./getResult";
 import { Rules } from "./components/Rules";
-import { useTranslation } from "react-i18next";
 
 const MAX_ATTEMTS_NUMBER = 6;
 
-function App() {
+const App = () => {
   const { t, i18n } = useTranslation();
-  // const [dictionary, setDictionary] = useState(dictionaryEn);
-  const dictionary = i18n.language === 'en' ? dictionaryEn : dictionaryRu;
-  console.log(dictionary);
+  const initialLanguage = dictionaryEn;
+  let dictionary = i18n.language === 'en' ? dictionaryEn : dictionaryRu;
+  const languageRef = useRef(initialLanguage);
+
+  languageRef.current = dictionary;
 
   const generateInitialState = () => (
     {
       currentWord: '',
-      secretWord: dictionary[Math.floor(Math.random() * dictionary.length)].toUpperCase(),
+      secretWord: languageRef.current[Math.floor(Math.random() * languageRef.current.length)].toUpperCase(),
       words: [],
     });
 
-  const [state, setState] = useState(generateInitialState());
+  const [state, setState] = useState(generateInitialState(dictionary));
   const { words, currentWord, secretWord } = state;
   const [mistake, setMistake] = useState("");
   const [rules, setRules] = useState(false);
@@ -36,7 +38,7 @@ function App() {
 
   const handleEnter = () => {
     setState((prev) => {
-      if (prev.currentWord.length === 5 && dictionary.includes(currentWord.toLowerCase())) {
+      if (prev.currentWord.length === 5 && languageRef.current.includes(currentWord.toLowerCase())) {
         return {
           ...prev,
           words: [...prev.words, prev.currentWord],
@@ -71,7 +73,7 @@ function App() {
 
   const handleLangChange = (code) => {
     i18n.changeLanguage(code)
-    setState(generateInitialState())
+    setState(generateInitialState)
   };
 
   const languages = [
@@ -91,6 +93,7 @@ function App() {
           <div className="main__languages">
             {languages.map((lang) => {
               return <button
+                key={lang.code}
                 className={`language__btn ${i18n.language === lang.code ? 'language__btn-checked' : ''}`}
                 onClick={() => { handleLangChange(lang.code) }}>{lang.name}</button>
             })}
