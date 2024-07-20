@@ -28,7 +28,7 @@ i18n.use(initReactI18next).init({
                 rulesBtn: 'Правила игры',
                 newGameBtn: 'Новая игра',
                 firstRowKeys: "ЙЦУКЕНГШЩЗХЪ",
-                secondRowKeys: "ЁФЫВАПРОЛДЖЭ",
+                secondRowKeys: "ФЫВАПРОЛДЖЭ",
                 thirdRowKeys: "ЯЧСМИТЬБЮ",
                 win: 'Вы выиграли!',
                 lost: 'Вы проиграли',

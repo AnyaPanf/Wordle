@@ -8,9 +8,11 @@
 
 .container {
     max-width: 715px;
+    height: 100vh;
     margin: 0 auto;
     padding: 0 15px;
     display: grid;
+    grid-template-columns: 100%;
     place-items: center;
 }
 
@@ -27,7 +29,6 @@ button {
 }
 
 .main__btn {
-
     height: 34px;
     cursor: pointer;
 }
@@ -47,7 +48,7 @@ button {
 .main__inp,
 .main__keyboard {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     place-items: center;
 }
 
@@ -59,6 +60,8 @@ button {
 .word__squares,
 .keyboard__btns {
     display: flex;
+    width: 100%;
+    place-content: center;
 }
 
 .word__square {
@@ -186,4 +189,37 @@ ol li::marker {
 
 .language__btn-checked {
     background-color: #dce1ed;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .container {
+        max-width: 480px;
+        padding: 0 8px;
+    }
+
+    .word__square {
+        max-width: 52px;
+        max-height: 52px;
+    }
+
+    .keyboard__key {
+        grid-template-columns: minmax(20px, 30px);
+        height: 46px;
+        font-size: 18px;
+        margin: 2px;
+    }
+
+    .keyboard__btn {
+        width: 30px;
+        height: 46px;
+    }
+
+    .rules {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .close {
+        margin-left: 245px;
+    }
 }

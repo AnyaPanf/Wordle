@@ -17,4 +17,4 @@ export const Rules = ({ handleRules, rules }) => {
             </div>
         )
     }
-}
+};
