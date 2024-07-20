@@ -41,10 +41,6 @@ button {
     padding: 5px;
 }
 
-.main {
-    margin-top: 10px;
-}
-
 .main__inp,
 .main__keyboard {
     display: grid;
